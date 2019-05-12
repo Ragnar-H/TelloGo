@@ -12,8 +12,8 @@ storiesOf('Command', module)
     <Command
       command={{
         action: 'left',
-        speed: number('Speed', 10, { min: 10, max: 100, range: true, step: 1 }),
-        distance: number('Distance', 20, { min: 20, max: 500, range: true, step: 1 }),
+        speed: number('Speed', 10, { min: 10, max: 100, range: true, step: 5 }),
+        distance: number('Distance', 20, { min: 20, max: 500, range: true, step: 5 }),
       }}
     />
   ))
