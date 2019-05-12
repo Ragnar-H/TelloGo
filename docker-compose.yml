@@ -1,0 +1,16 @@
+version: "3"
+services:
+  server:
+    build: ./server
+    ports:
+      # Note that you need to forward a large range of ports for WebRTC
+      # https://stackoverflow.com/questions/29563830/use-specific-ports-for-webrtc
+      - "8089:8089/udp" # Drone
+      - "8090:8090/udp" # Drone
+      - "11111:11111/udp" # Drone
+      - "6038:6038/udp" # Drone
+      - "50000:50000" # API Server
+  client:
+    build: ./client
+    ports:
+      - "5000:5000"
