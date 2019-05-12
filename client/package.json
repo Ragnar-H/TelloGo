@@ -1,0 +1,62 @@
+{
+  "name": "client",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@types/jest": "24.0.11",
+    "@types/lodash-es": "^4.17.3",
+    "@types/node": "11.13.7",
+    "@types/react": "16.8.14",
+    "@types/react-beautiful-dnd": "^11.0.1",
+    "@types/react-dom": "16.8.4",
+    "lodash-es": "^4.17.11",
+    "react": "^16.8.6",
+    "react-beautiful-dnd": "^11.0.2",
+    "react-dom": "^16.8.6",
+    "react-scripts": "3.0.0",
+    "react-spring": "^8.0.20",
+    "react-use-gesture": "^5.0.0",
+    "react-with-gesture": "^4.0.8",
+    "typescript": "3.4.5"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "lint": "eslint . --ext js,ts,tsx --fix",
+    "typecheck": "tsc --noEmit -p .",
+    "storybook": "start-storybook -p 9009 -s public",
+    "build-storybook": "build-storybook -s public"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@babel/core": "^7.4.4",
+    "@storybook/addon-actions": "^5.0.11",
+    "@storybook/addon-links": "^5.0.11",
+    "@storybook/addons": "^5.0.11",
+    "@storybook/react": "^5.0.11",
+    "@typescript-eslint/eslint-plugin": "^1.7.0",
+    "@typescript-eslint/parser": "^1.7.0",
+    "babel-loader": "^8.0.5",
+    "eslint": "^5.16.0",
+    "eslint-config-prettier": "^4.2.0",
+    "eslint-plugin-prettier": "^3.0.1",
+    "eslint-plugin-react": "^7.13.0",
+    "prettier": "^1.17.0"
+  }
+}
