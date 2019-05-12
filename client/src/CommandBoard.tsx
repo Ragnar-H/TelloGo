@@ -8,6 +8,7 @@ import {
   DraggableLocation,
 } from 'react-beautiful-dnd'
 import { CommandItem, Commands } from './DraggableCommands'
+import { primaryDarkColor } from './theme'
 
 const reorder = (
   list: CommandItem[],
@@ -99,7 +100,7 @@ export function CommandBoard() {
               {...provided.droppableProps}
               style={{
                 minHeight: '300px',
-                backgroundColor: '#bb44dd',
+                backgroundColor: primaryDarkColor,
               }}
             >
               <div ref={provided.innerRef} {...provided.droppableProps}>
@@ -114,7 +115,7 @@ export function CommandBoard() {
             <div
               ref={provided.innerRef}
               {...provided.droppableProps}
-              style={{ minHeight: '120px', backgroundColor: '#f3f3f3' }}
+              style={{ minHeight: '120px' }}
             >
               <Commands direction="row" list={availableCommands} />
               {provided.placeholder}

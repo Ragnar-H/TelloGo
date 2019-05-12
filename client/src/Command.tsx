@@ -1,9 +1,9 @@
 import React from 'react'
 import { CommandAction } from 'DraggableCommands'
 import { useSpring, animated } from 'react-spring'
+import { secondaryTextColor } from './theme'
 export const MAX_SPEED = 100
 export const MAX_DISTANCE = 500
-
 type DroneCommand = {
   action: CommandAction
   speed: number
@@ -67,8 +67,16 @@ export function Command(props: Props) {
       transform={`rotate(${rotation})`}
       xmlns="http://www.w3.org/2000/svg"
     >
-      <animated.path d={animatedPaths.bodyPath} stroke="#219653" strokeWidth="4" />
-      <animated.path d={animatedPaths.arrowPath} stroke="#219653" strokeWidth="4" />
+      <animated.path
+        d={animatedPaths.bodyPath}
+        stroke={secondaryTextColor}
+        strokeWidth="4"
+      />
+      <animated.path
+        d={animatedPaths.arrowPath}
+        stroke={secondaryTextColor}
+        strokeWidth="4"
+      />
     </svg>
   )
 }

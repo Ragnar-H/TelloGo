@@ -1,26 +1,9 @@
 import React from 'react'
-import { ReactComponent as ArrowUp } from './ArrowUp.svg'
-import { ReactComponent as ArrowDown } from './ArrowDown.svg'
-import { ReactComponent as ArrowRight } from './ArrowRight.svg'
-import { ReactComponent as ArrowLeft } from './ArrowLeft.svg'
 import { Draggable, DraggableProvided, DraggableStateSnapshot } from 'react-beautiful-dnd'
+import { Command } from './Command'
+import { secondaryColor, secondaryLightColor } from './theme'
 
 export type CommandAction = 'up' | 'down' | 'left' | 'right'
-
-function getIcon(action: CommandAction) {
-  switch (action) {
-    case 'up':
-      return <ArrowUp />
-    case 'down':
-      return <ArrowDown />
-    case 'right':
-      return <ArrowRight />
-    case 'left':
-      return <ArrowLeft />
-    default:
-      throw new Error('Unknown command')
-  }
-}
 
 const grid = 8
 
@@ -33,7 +16,7 @@ const getItemStyle = (draggableStyle: any, isDragging: boolean): {} => ({
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
-  background: isDragging ? 'lightgreen' : 'grey',
+  background: isDragging ? secondaryColor : secondaryLightColor,
   ...draggableStyle,
 })
 
@@ -64,7 +47,7 @@ export function DraggableCommand(props: CommandProps) {
               snapshotDraggable.isDragging
             )}
           >
-            {getIcon(props.action)}
+            <Command command={{ action: props.action, speed: 10, distance: 20 }} />
           </div>
           {providedDraggable.placeholder}
         </div>
