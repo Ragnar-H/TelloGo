@@ -1,6 +1,6 @@
 import React from 'react'
 import { CommandAction } from 'DraggableCommands'
-
+import { useSpring, animated } from 'react-spring'
 export const MAX_SPEED = 100
 export const MAX_DISTANCE = 500
 
@@ -49,8 +49,15 @@ function getInitialCoordinates(command: DroneCommand) {
 }
 
 export function Command(props: Props) {
-  const { tip, base, head } = getInitialCoordinates(props.command)
+  const coords = getInitialCoordinates(props.command)
   const rotation = getRotation(props.command.action)
+  const { tip, base, head } = coords
+  const bodyPath = `M${tip.x} ${tip.y}L${base.x} ${base.y}`
+  const arrowPath = `M${head.x1} ${head.y1}L${head.x2} ${head.y2}L${head.x3} ${head.y3}`
+  const animatedPaths = useSpring({
+    bodyPath,
+    arrowPath,
+  })
   return (
     <svg
       width="48"
@@ -60,12 +67,8 @@ export function Command(props: Props) {
       transform={`rotate(${rotation})`}
       xmlns="http://www.w3.org/2000/svg"
     >
-      <path d={`M${tip.x} ${tip.y}L${base.x} ${base.y}`} stroke="red" strokeWidth="4" />
-      <path
-        d={`M${head.x1} ${head.y1}L${head.x2} ${head.y2}L${head.x3} ${head.y3}`}
-        stroke="black"
-        strokeWidth="4"
-      />
+      <animated.path d={animatedPaths.bodyPath} stroke="red" strokeWidth="4" />
+      <animated.path d={animatedPaths.arrowPath} stroke="black" strokeWidth="4" />
     </svg>
   )
 }
