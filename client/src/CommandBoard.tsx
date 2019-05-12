@@ -52,8 +52,6 @@ export function CommandBoard() {
   const [queuedCommands, setQueuedCommands] = useState<CommandItem[]>([])
   const [availableCommands, setAvailableCommands] = useState(initialCommands)
   function onDragEnd(result: DropResult, provided: ResponderProvided) {
-    console.log('dragging done')
-    console.log({ result, provided })
     const { source, destination } = result
 
     if (!destination) {
