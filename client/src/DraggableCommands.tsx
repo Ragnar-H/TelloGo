@@ -1,129 +1,89 @@
-import React, { useState } from 'react'
-import {
-  DragDropContext,
-  DropResult,
-  ResponderProvided,
-  Droppable,
-  DroppableProvided,
-  DraggableLocation,
-} from 'react-beautiful-dnd'
-import { CommandItem, Commands } from './Commands'
+import React from 'react'
+import { ReactComponent as ArrowUp } from './ArrowUp.svg'
+import { ReactComponent as ArrowDown } from './ArrowDown.svg'
+import { ReactComponent as ArrowRight } from './ArrowRight.svg'
+import { ReactComponent as ArrowLeft } from './ArrowLeft.svg'
+import { Draggable, DraggableProvided, DraggableStateSnapshot } from 'react-beautiful-dnd'
 
-const reorder = (
-  list: CommandItem[],
-  startIndex: number,
-  endIndex: number
-): CommandItem[] => {
-  const result = [...list]
-  const [removed] = result.splice(startIndex, 1)
-  result.splice(endIndex, 0, removed)
+export type CommandAction = 'up' | 'down' | 'left' | 'right'
 
-  return result
-}
-
-const move = ({
-  source,
-  destination,
-  droppableSource,
-  droppableDestination,
-}: {
-  source: CommandItem[]
-  destination: CommandItem[]
-  droppableSource: DraggableLocation
-  droppableDestination: DraggableLocation
-}) => {
-  const sourceClone = [...source]
-  const destClone = [...destination]
-  const [removed] = sourceClone.splice(droppableSource.index, 1)
-
-  destClone.splice(droppableDestination.index, 0, removed)
-
-  return { source: sourceClone, destination: destClone }
-}
-
-const initialCommands: CommandItem[] = [
-  { id: 'first', action: 'up' },
-  { id: 'second', action: 'down' },
-  { id: 'third', action: 'right' },
-  { id: 'fourth', action: 'left' },
-]
-
-export function DraggableCommands() {
-  const [queuedCommands, setQueuedCommands] = useState<CommandItem[]>([])
-  const [availableCommands, setAvailableCommands] = useState(initialCommands)
-  function onDragEnd(result: DropResult, provided: ResponderProvided) {
-    console.log('dragging done')
-    console.log({ result, provided })
-    const { source, destination } = result
-
-    if (!destination) {
-      return
-    }
-
-    if (source.droppableId === destination.droppableId) {
-      if (source.droppableId === 'commands') {
-        const items = reorder(availableCommands, source.index, destination.index)
-        setAvailableCommands(items)
-      } else if (source.droppableId === 'queuedCommands') {
-        const items = reorder(queuedCommands, source.index, destination.index)
-        setQueuedCommands(items)
-      }
-    } else {
-      if (source.droppableId === 'commands') {
-        const resultFromMove = move({
-          source: availableCommands,
-          destination: queuedCommands,
-          droppableSource: source,
-          droppableDestination: destination,
-        })
-        setAvailableCommands(resultFromMove.source)
-        setQueuedCommands(resultFromMove.destination)
-      } else {
-        const resultFromMove = move({
-          source: queuedCommands,
-          destination: availableCommands,
-          droppableSource: source,
-          droppableDestination: destination,
-        })
-        setAvailableCommands(resultFromMove.destination)
-        setQueuedCommands(resultFromMove.source)
-      }
-    }
+function getIcon(action: CommandAction) {
+  switch (action) {
+    case 'up':
+      return <ArrowUp />
+    case 'down':
+      return <ArrowDown />
+    case 'right':
+      return <ArrowRight />
+    case 'left':
+      return <ArrowLeft />
+    default:
+      throw new Error('Unknown command')
   }
+}
 
+const grid = 8
+
+const getItemStyle = (draggableStyle: any, isDragging: boolean): {} => ({
+  userSelect: 'none',
+  padding: 2 * grid,
+  margin: `0 0 ${grid}px 0`,
+  width: '88px',
+  height: '88px',
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  background: isDragging ? 'lightgreen' : 'grey',
+  ...draggableStyle,
+})
+
+export type CommandItem = {
+  action: CommandAction
+  id: string
+}
+
+type CommandProps = {
+  action: CommandAction
+  index: number
+}
+
+export function DraggableCommand(props: CommandProps) {
   return (
-    <div style={{ minHeight: '100vh' }}>
-      <DragDropContext onDragEnd={onDragEnd}>
-        <Droppable droppableId="queuedCommands">
-          {(provided: DroppableProvided) => (
-            <div
-              ref={provided.innerRef}
-              {...provided.droppableProps}
-              style={{
-                minHeight: '300px',
-                backgroundColor: '#bb44dd',
-              }}
-            >
-              <div ref={provided.innerRef} {...provided.droppableProps}>
-                <Commands direction="column" list={queuedCommands} />
-              </div>
-              {provided.placeholder}
-            </div>
-          )}
-        </Droppable>
-        <Droppable droppableId="commands" direction="horizontal">
-          {(provided: DroppableProvided) => (
-            <div
-              ref={provided.innerRef}
-              {...provided.droppableProps}
-              style={{ minHeight: '120px', backgroundColor: '#f3f3f3' }}
-            >
-              <Commands direction="row" list={availableCommands} />
-              {provided.placeholder}
-            </div>
-          )}
-        </Droppable>
-      </DragDropContext>
+    <Draggable key={props.action} draggableId={props.action} index={props.index}>
+      {(
+        providedDraggable: DraggableProvided,
+        snapshotDraggable: DraggableStateSnapshot
+      ) => (
+        <div>
+          <div
+            ref={providedDraggable.innerRef}
+            {...providedDraggable.draggableProps}
+            {...providedDraggable.dragHandleProps}
+            style={getItemStyle(
+              providedDraggable.draggableProps.style,
+              snapshotDraggable.isDragging
+            )}
+          >
+            {getIcon(props.action)}
+          </div>
+          {providedDraggable.placeholder}
+        </div>
+      )}
+    </Draggable>
+  )
+}
+
+type CommandsProps = {
+  list: CommandItem[]
+  direction: 'row' | 'column'
+}
+
+export function Commands(props: CommandsProps) {
+  return (
+    <div style={{ display: 'flex', flexDirection: props.direction }}>
+      {props.list.map((command, index) => (
+        <DraggableCommand key={index} action={command.action} index={index} />
+      ))}
     </div>
   )
 }
