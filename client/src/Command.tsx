@@ -2,6 +2,7 @@ import React from 'react'
 import { CommandAction } from 'DraggableCommands'
 
 export const MAX_SPEED = 100
+export const MAX_DISTANCE = 500
 
 type DroneCommand = {
   action: CommandAction
@@ -30,10 +31,11 @@ function getRotation(action: CommandAction) {
 
 function getInitialCoordinates(command: DroneCommand) {
   const minArrowLength = 8
+  const minBaseLength = 24
   const speed = (command.speed / MAX_SPEED) * 8 + minArrowLength
-
+  const distance = (command.distance / MAX_DISTANCE) * 16 + minBaseLength
   const tip = { x: 4, y: 16 }
-  const base = { x: 48, y: 16 }
+  const base = { x: tip.x + distance, y: 16 }
   const head = {
     x1: tip.x + speed,
     y1: tip.y - speed,
