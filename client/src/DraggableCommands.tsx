@@ -1,18 +1,18 @@
 import React from 'react'
 import { Draggable, DraggableProvided, DraggableStateSnapshot } from 'react-beautiful-dnd'
 import { Command } from './Command'
-import { secondaryColor, secondaryLightColor } from './theme'
+import { secondaryColor, secondaryLightColor, sizingUnit } from './theme'
 
 export type CommandAction = 'up' | 'down' | 'left' | 'right'
 
 const grid = 8
 
+const COMMAND_WIDTH = sizingUnit * 16
 const getItemStyle = (draggableStyle: any, isDragging: boolean): {} => ({
   userSelect: 'none',
   padding: 2 * grid,
   margin: `0 0 ${grid}px 0`,
-  width: '88px',
-  height: '88px',
+  width: `${COMMAND_WIDTH}px`,
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
