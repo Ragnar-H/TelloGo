@@ -67,8 +67,8 @@ export function Command(props: Props) {
       transform={`rotate(${rotation})`}
       xmlns="http://www.w3.org/2000/svg"
     >
-      <animated.path d={animatedPaths.bodyPath} stroke="red" strokeWidth="4" />
-      <animated.path d={animatedPaths.arrowPath} stroke="black" strokeWidth="4" />
+      <animated.path d={animatedPaths.bodyPath} stroke="#219653" strokeWidth="4" />
+      <animated.path d={animatedPaths.arrowPath} stroke="#219653" strokeWidth="4" />
     </svg>
   )
 }
