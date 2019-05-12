@@ -3,7 +3,7 @@ import { Draggable, DraggableProvided, DraggableStateSnapshot } from 'react-beau
 import { Command } from './Command'
 import { secondaryColor, secondaryLightColor, sizingUnit } from './theme'
 
-export type CommandAction = 'up' | 'down' | 'left' | 'right'
+export type CommandDirection = 'up' | 'down' | 'left' | 'right'
 
 const COMMAND_WIDTH = sizingUnit * 16
 const getItemStyle = (draggableStyle: any, isDragging: boolean): {} => ({
@@ -19,18 +19,18 @@ const getItemStyle = (draggableStyle: any, isDragging: boolean): {} => ({
 })
 
 export type CommandItem = {
-  action: CommandAction
+  direction: CommandDirection
   id: string
 }
 
 type CommandProps = {
-  action: CommandAction
+  direction: CommandDirection
   index: number
 }
 
 export function DraggableCommand(props: CommandProps) {
   return (
-    <Draggable key={props.action} draggableId={props.action} index={props.index}>
+    <Draggable key={props.direction} draggableId={props.direction} index={props.index}>
       {(
         providedDraggable: DraggableProvided,
         snapshotDraggable: DraggableStateSnapshot
@@ -45,7 +45,7 @@ export function DraggableCommand(props: CommandProps) {
               snapshotDraggable.isDragging
             )}
           >
-            <Command command={{ action: props.action, speed: 10, distance: 20 }} />
+            <Command direction={props.direction} speed={10} distance={20} />
           </div>
           {providedDraggable.placeholder}
         </div>
@@ -63,7 +63,7 @@ export function Commands(props: CommandsProps) {
   return (
     <div style={{ display: 'flex', flexDirection: props.direction }}>
       {props.list.map((command, index) => (
-        <DraggableCommand key={index} action={command.action} index={index} />
+        <DraggableCommand key={index} direction={command.direction} index={index} />
       ))}
     </div>
   )

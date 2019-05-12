@@ -43,10 +43,10 @@ const move = ({
 }
 
 const initialCommands: CommandItem[] = [
-  { id: 'first', action: 'up' },
-  { id: 'second', action: 'down' },
-  { id: 'third', action: 'right' },
-  { id: 'fourth', action: 'left' },
+  { id: 'first', direction: 'up' },
+  { id: 'second', direction: 'down' },
+  { id: 'third', direction: 'right' },
+  { id: 'fourth', direction: 'left' },
 ]
 
 export function CommandBoard() {

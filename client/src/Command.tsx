@@ -1,5 +1,5 @@
 import React from 'react'
-import { CommandAction } from 'DraggableCommands'
+import { CommandDirection } from 'DraggableCommands'
 import { useSpring, animated } from 'react-spring'
 import {
   primaryTextColor,
@@ -9,18 +9,20 @@ import {
 } from './theme'
 export const MAX_SPEED = 100
 export const MAX_DISTANCE = 500
-type DroneCommand = {
-  action: CommandAction
+
+export type DirectedCommand = {
+  direction: CommandDirection
   speed: number
   distance: number
 }
 
-type Props = {
-  command: DroneCommand
+type Props = DirectedCommand & {
+  onSetSpeed: (speed: number) => void
+  onSetDistance: (distance: number) => void
 }
 
-function getRotation(action: CommandAction) {
-  switch (action) {
+function getRotation(direction: CommandDirection) {
+  switch (direction) {
     case 'left':
       return 0
     case 'right':
@@ -34,7 +36,7 @@ function getRotation(action: CommandAction) {
   }
 }
 
-function getInitialCoordinates(command: DroneCommand) {
+function getInitialCoordinates(command: DirectedCommand) {
   const minArrowLength = 8
   const minBaseLength = 24
   const speed = (command.speed / MAX_SPEED) * 8 + minArrowLength
@@ -54,8 +56,12 @@ function getInitialCoordinates(command: DroneCommand) {
 }
 
 export function Command(props: Props) {
-  const coords = getInitialCoordinates(props.command)
-  const rotation = getRotation(props.command.action)
+  const coords = getInitialCoordinates({
+    direction: props.direction,
+    distance: props.distance,
+    speed: props.speed,
+  })
+  const rotation = getRotation(props.direction)
   const { tip, base, head } = coords
   const bodyPath = `M${tip.x} ${tip.y}L${base.x} ${base.y}`
   const arrowPath = `M${head.x1} ${head.y1}L${head.x2} ${head.y2}L${head.x3} ${head.y3}`
@@ -98,7 +104,10 @@ export function Command(props: Props) {
         <input
           id="distance"
           type="number"
-          value={props.command.distance}
+          value={props.distance}
+          onChange={event => {
+            props.onSetDistance(parseInt(event.currentTarget.value))
+          }}
           style={{
             minWidth: 0,
             display: 'flex',
@@ -122,7 +131,10 @@ export function Command(props: Props) {
         <input
           id="speed"
           type="number"
-          value={props.command.speed}
+          value={props.speed}
+          onChange={event => {
+            props.onSetSpeed(parseInt(event.currentTarget.value))
+          }}
           style={{
             minWidth: 0,
             display: 'flex',
