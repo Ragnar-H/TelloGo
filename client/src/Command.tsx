@@ -34,8 +34,8 @@ function getInitialCoordinates(command: DroneCommand) {
   const minBaseLength = 24
   const speed = (command.speed / MAX_SPEED) * 8 + minArrowLength
   const distance = (command.distance / MAX_DISTANCE) * 16 + minBaseLength
-  const tip = { x: 4, y: 16 }
-  const base = { x: tip.x + distance, y: 16 }
+  const tip = { x: 4, y: 24 }
+  const base = { x: tip.x + distance, y: 24 }
   const head = {
     x1: tip.x + speed,
     y1: tip.y - speed,
@@ -60,9 +60,9 @@ export function Command(props: Props) {
   })
   return (
     <svg
-      width="48"
-      height="32"
-      viewBox="0 0 48 32"
+      width="100"
+      height="100"
+      viewBox="0 0 48 48"
       fill="none"
       transform={`rotate(${rotation})`}
       xmlns="http://www.w3.org/2000/svg"
