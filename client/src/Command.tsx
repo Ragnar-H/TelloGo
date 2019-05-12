@@ -16,42 +16,14 @@ type Props = {
 export function Command(props: Props) {
   return (
     <svg
-      width="32"
-      height="88"
-      viewBox="0 0 32 88"
+      width="48"
+      height="32"
+      viewBox="0 0 48 32"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <line
-        x1="16"
-        y1="72"
-        x2="16"
-        y2="4"
-        stroke="#C41212"
-        strokeWidth="4"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <line
-        x1="16"
-        y1="4"
-        x2="4"
-        y2="16"
-        stroke="#C41212"
-        strokeWidth="4"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <line
-        x1="28"
-        y1="16"
-        x2="16"
-        y2="4"
-        stroke="#C41212"
-        strokeWidth="4"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
+      <path d="M4 16L48 16" stroke="red" strokeWidth="4" />
+      <path d="M16 2L4 16L16 30" stroke="black" strokeWidth="4" />
     </svg>
   )
 }
