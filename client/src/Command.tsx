@@ -13,6 +13,21 @@ type Props = {
   command: DroneCommand
 }
 
+function getRotation(action: CommandAction) {
+  switch (action) {
+    case 'left':
+      return 0
+    case 'right':
+      return 180
+    case 'up':
+      return 90
+    case 'down':
+      return -90
+    default:
+      throw new Error('Unknown direction')
+  }
+}
+
 function getInitialCoordinates(command: DroneCommand) {
   const minArrowLength = 8
   const speed = (command.speed / MAX_SPEED) * 8 + minArrowLength
@@ -33,12 +48,14 @@ function getInitialCoordinates(command: DroneCommand) {
 
 export function Command(props: Props) {
   const { tip, base, head } = getInitialCoordinates(props.command)
+  const rotation = getRotation(props.command.action)
   return (
     <svg
       width="48"
       height="32"
       viewBox="0 0 48 32"
       fill="none"
+      transform={`rotate(${rotation})`}
       xmlns="http://www.w3.org/2000/svg"
     >
       <path d={`M${tip.x} ${tip.y}L${base.x} ${base.y}`} stroke="red" strokeWidth="4" />
