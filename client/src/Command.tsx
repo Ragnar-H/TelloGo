@@ -8,7 +8,10 @@ import {
   sizingUnit,
 } from './theme'
 export const MAX_SPEED = 100
+export const MIN_SPEED = 10
 export const MAX_DISTANCE = 500
+export const MIN_DISTANCE = 20
+const STEP = 5
 
 export type DirectedCommand = {
   id: string
@@ -106,9 +109,15 @@ export function Command(props: Props) {
         <input
           id="distance"
           type="number"
+          max={MAX_DISTANCE}
+          min={MIN_DISTANCE}
+          step={STEP * 2}
           value={props.distance}
           onChange={event => {
-            props.onSetDistance(parseInt(event.currentTarget.value))
+            const newValue = parseInt(event.currentTarget.value)
+            if (newValue >= MIN_DISTANCE && newValue <= MAX_DISTANCE) {
+              props.onSetDistance(newValue)
+            }
           }}
           style={{
             minWidth: 0,
@@ -134,8 +143,14 @@ export function Command(props: Props) {
           id="speed"
           type="number"
           value={props.speed}
+          max={MAX_SPEED}
+          min={MIN_SPEED}
+          step={STEP}
           onChange={event => {
-            props.onSetSpeed(parseInt(event.currentTarget.value))
+            const newValue = parseInt(event.currentTarget.value)
+            if (newValue >= MIN_SPEED && newValue <= MAX_SPEED) {
+              props.onSetSpeed(newValue)
+            }
           }}
           style={{
             minWidth: 0,
