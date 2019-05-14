@@ -23,6 +23,8 @@ export type CommandItem = DirectedCommand
 type CommandProps = {
   index: number
   commandItem: CommandItem
+  onSetSpeed: (speed: number) => void
+  onSetDistance: (distance: number) => void
 }
 
 export function DraggableCommand(props: CommandProps) {
@@ -45,8 +47,10 @@ export function DraggableCommand(props: CommandProps) {
             <Command
               id={props.commandItem.id}
               direction={props.commandItem.direction}
-              speed={10}
-              distance={20}
+              speed={props.commandItem.speed}
+              distance={props.commandItem.distance}
+              onSetDistance={props.onSetDistance}
+              onSetSpeed={props.onSetSpeed}
             />
           </div>
           {providedDraggable.placeholder}
@@ -59,13 +63,25 @@ export function DraggableCommand(props: CommandProps) {
 type CommandsProps = {
   list: CommandItem[]
   direction: 'row' | 'column'
+  onSetSpeed: (commandId: string, speed: number) => void
+  onSetDistance: (commandId: string, distance: number) => void
 }
 
 export function Commands(props: CommandsProps) {
   return (
     <div style={{ display: 'flex', flexDirection: props.direction }}>
       {props.list.map((command, index) => (
-        <DraggableCommand key={command.id} commandItem={command} index={index} />
+        <DraggableCommand
+          key={command.id}
+          commandItem={command}
+          index={index}
+          onSetDistance={distance => {
+            props.onSetDistance(command.id, distance)
+          }}
+          onSetSpeed={speed => {
+            props.onSetSpeed(command.id, speed)
+          }}
+        />
       ))}
     </div>
   )

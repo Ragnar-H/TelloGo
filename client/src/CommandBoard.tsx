@@ -78,6 +78,43 @@ const initialCommands: CommandItem[] = [
 export function CommandBoard() {
   const [queuedCommands, setQueuedCommands] = useState<CommandItem[]>([])
   const [availableCommands, setAvailableCommands] = useState(initialCommands)
+
+  function handleSetSpeed(commandId: string, speed: number) {
+    const availableClone = availableCommands.slice()
+    const availableIdx = availableClone.findIndex(command => command.id === commandId)
+    if (availableIdx > 0) {
+      availableCommands[availableIdx].speed = speed
+      setAvailableCommands(availableClone)
+    } else {
+      const queuedClone = queuedCommands.slice()
+
+      const queuedIdx = queuedClone.findIndex(command => command.id === commandId)
+      if (queuedIdx < 0) {
+        throw new Error(`Cannot find command by id ${commandId}`)
+      }
+      queuedClone[queuedIdx].speed = speed
+      setQueuedCommands(queuedClone)
+    }
+  }
+
+  function handleSetDistance(commandId: string, distance: number) {
+    const availableClone = availableCommands.slice()
+    const availableIdx = availableClone.findIndex(command => command.id === commandId)
+    if (availableIdx > 0) {
+      availableCommands[availableIdx].distance = distance
+      setAvailableCommands(availableClone)
+    } else {
+      const queuedClone = queuedCommands.slice()
+
+      const queuedIdx = queuedClone.findIndex(command => command.id === commandId)
+      if (queuedIdx < 0) {
+        throw new Error(`Cannot find command by id ${commandId}`)
+      }
+      queuedClone[queuedIdx].distance = distance
+      setQueuedCommands(queuedClone)
+    }
+  }
+
   function onDragEnd(result: DropResult, provided: ResponderProvided) {
     const { source, destination } = result
 
@@ -133,7 +170,12 @@ export function CommandBoard() {
               }}
             >
               <div ref={provided.innerRef} {...provided.droppableProps}>
-                <Commands direction="column" list={queuedCommands} />
+                <Commands
+                  direction="column"
+                  list={queuedCommands}
+                  onSetDistance={handleSetDistance}
+                  onSetSpeed={handleSetSpeed}
+                />
               </div>
               {provided.placeholder}
             </div>
@@ -146,7 +188,12 @@ export function CommandBoard() {
               {...provided.droppableProps}
               style={{ minHeight: '120px' }}
             >
-              <Commands direction="row" list={availableCommands} />
+              <Commands
+                direction="row"
+                list={availableCommands}
+                onSetDistance={handleSetDistance}
+                onSetSpeed={handleSetSpeed}
+              />
               {provided.placeholder}
             </div>
           )}
