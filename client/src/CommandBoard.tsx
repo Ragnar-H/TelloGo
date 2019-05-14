@@ -7,7 +7,7 @@ import {
   DroppableProvided,
   DraggableLocation,
 } from 'react-beautiful-dnd'
-import { CommandItem, Commands } from './DraggableCommands'
+import { CommandItem, Commands, CommandDirection } from './DraggableCommands'
 import { primaryDarkColor } from './theme'
 
 const reorder = (
@@ -42,11 +42,35 @@ const move = ({
   return { source: sourceClone, destination: destClone }
 }
 
+function fillMissingCommands(commandList: CommandItem[]): CommandItem[] {
+  const commands = commandList.slice()
+
+  initialCommands.map(command => {
+    const commandIsAvailable = commands.find(
+      availableCommand => availableCommand.direction === command.direction
+    )
+    if (!commandIsAvailable) {
+      commands.push(createCommand(command.direction))
+    }
+  })
+
+  return commands
+}
+
+let commandIdx = 0
+
+function createCommand(direction: CommandDirection): CommandItem {
+  return {
+    direction,
+    id: `${commandIdx++}-command`,
+  }
+}
+
 const initialCommands: CommandItem[] = [
-  { id: 'first', direction: 'up' },
-  { id: 'second', direction: 'down' },
-  { id: 'third', direction: 'right' },
-  { id: 'fourth', direction: 'left' },
+  createCommand('up'),
+  createCommand('down'),
+  createCommand('right'),
+  createCommand('left'),
 ]
 
 export function CommandBoard() {
@@ -75,7 +99,10 @@ export function CommandBoard() {
           droppableSource: source,
           droppableDestination: destination,
         })
-        setAvailableCommands(resultFromMove.source)
+
+        const filledCommands = fillMissingCommands(resultFromMove.source)
+
+        setAvailableCommands(filledCommands)
         setQueuedCommands(resultFromMove.destination)
       } else {
         const resultFromMove = move({

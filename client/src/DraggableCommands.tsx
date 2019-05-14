@@ -26,11 +26,12 @@ export type CommandItem = {
 type CommandProps = {
   direction: CommandDirection
   index: number
+  draggableId: string
 }
 
 export function DraggableCommand(props: CommandProps) {
   return (
-    <Draggable key={props.direction} draggableId={props.direction} index={props.index}>
+    <Draggable draggableId={props.draggableId} index={props.index}>
       {(
         providedDraggable: DraggableProvided,
         snapshotDraggable: DraggableStateSnapshot
@@ -63,7 +64,12 @@ export function Commands(props: CommandsProps) {
   return (
     <div style={{ display: 'flex', flexDirection: props.direction }}>
       {props.list.map((command, index) => (
-        <DraggableCommand key={index} direction={command.direction} index={index} />
+        <DraggableCommand
+          key={command.id}
+          direction={command.direction}
+          index={index}
+          draggableId={command.id}
+        />
       ))}
     </div>
   )
