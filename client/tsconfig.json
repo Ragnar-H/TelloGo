@@ -25,6 +25,7 @@
     "jsx": "preserve"
   },
   "include": [
-    "src"
+    "src",
+    "stories"
   ]
 }
