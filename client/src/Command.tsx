@@ -11,6 +11,7 @@ export const MAX_SPEED = 100
 export const MAX_DISTANCE = 500
 
 export type DirectedCommand = {
+  id: string
   direction: CommandDirection
   speed: number
   distance: number
@@ -60,6 +61,7 @@ export function Command(props: Props) {
     direction: props.direction,
     distance: props.distance,
     speed: props.speed,
+    id: props.id,
   })
   const rotation = getRotation(props.direction)
   const { tip, base, head } = coords

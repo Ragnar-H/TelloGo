@@ -11,6 +11,7 @@ storiesOf('Command', module)
   .addDecorator(center)
   .add('default', () => (
     <Command
+      id="some-command-id"
       onSetDistance={action('onSetDistance')}
       onSetSpeed={action('onSetSpeed')}
       direction="left"
@@ -21,6 +22,7 @@ storiesOf('Command', module)
   .add('multiple', () => (
     <div>
       <Command
+        id="command-id-0"
         onSetDistance={action('onSetDistance')}
         onSetSpeed={action('onSetSpeed')}
         direction="left"
@@ -28,6 +30,7 @@ storiesOf('Command', module)
         distance={20}
       />
       <Command
+        id="command-id-1"
         onSetDistance={action('onSetDistance')}
         onSetSpeed={action('onSetSpeed')}
         direction="down"
@@ -35,6 +38,7 @@ storiesOf('Command', module)
         distance={250}
       />
       <Command
+        id="command-id-2"
         onSetDistance={action('onSetDistance')}
         onSetSpeed={action('onSetSpeed')}
         direction="right"
@@ -42,6 +46,7 @@ storiesOf('Command', module)
         distance={20}
       />
       <Command
+        id="command-id-3"
         onSetDistance={action('onSetDistance')}
         onSetSpeed={action('onSetSpeed')}
         direction="up"

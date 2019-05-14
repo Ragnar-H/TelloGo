@@ -63,6 +63,8 @@ function createCommand(direction: CommandDirection): CommandItem {
   return {
     direction,
     id: `${commandIdx++}-command`,
+    speed: 10,
+    distance: 20,
   }
 }
 

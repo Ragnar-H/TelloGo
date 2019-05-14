@@ -1,6 +1,6 @@
 import React from 'react'
 
-export function center(storyFn) {
+export function center(storyFn: Function) {
   return (
     <div
       style={{
