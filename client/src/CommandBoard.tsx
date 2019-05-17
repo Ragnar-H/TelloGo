@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import {
   DragDropContext,
   DropResult,
@@ -10,6 +10,12 @@ import {
 import { CommandItem, Commands, CommandDirection } from './DraggableCommands'
 import { primaryDarkColor } from './theme'
 import { Control } from './ControlCommand'
+
+async function wait(seconds: number) {
+  return new Promise(resolve => {
+    setTimeout(resolve, seconds * 1000)
+  })
+}
 
 const reorder = (
   list: CommandItem[],
@@ -92,6 +98,38 @@ const initialCommands: CommandItem[] = [
 export function CommandBoard() {
   const [queuedCommands, setQueuedCommands] = useState<CommandItem[]>([])
   const [availableCommands, setAvailableCommands] = useState(initialCommands)
+
+  const [isPlaying, setIsPlaying] = useState(false)
+
+  useEffect(() => {
+    playCommands(queuedCommands)
+  }, [isPlaying])
+
+  function playCommands(commands: CommandItem[]) {
+    async function executeCommand() {
+      if (!isPlaying) {
+        return
+      }
+      if (commands.length === 0) {
+        setIsPlaying(false)
+        return
+      }
+      const currentCommand = commands[0]
+      if (currentCommand) {
+        const { speed, distance } = currentCommand as any
+        if (speed) {
+          await wait(distance / speed)
+        } else {
+          await wait(5)
+        }
+      }
+
+      const newCommands = commands.splice(1)
+      setQueuedCommands(newCommands)
+      playCommands(newCommands)
+    }
+    executeCommand()
+  }
 
   function handleSetSpeed(commandId: string, speed: number) {
     const availableClone = availableCommands.slice()
@@ -196,6 +234,9 @@ export function CommandBoard() {
                 gridArea: 'queue',
               }}
             >
+              <button onClick={() => setIsPlaying(prevIsPlaying => !prevIsPlaying)}>
+                {isPlaying ? 'Stop' : 'Play'}
+              </button>
               <div ref={provided.innerRef} {...provided.droppableProps}>
                 <Commands
                   direction="column"
