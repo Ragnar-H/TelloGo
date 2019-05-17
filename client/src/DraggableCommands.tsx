@@ -71,7 +71,13 @@ type CommandsProps = {
 
 export function Commands(props: CommandsProps) {
   return (
-    <div style={{ display: 'flex', flexDirection: props.direction }}>
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: props.direction,
+        alignItems: props.direction === 'column' ? 'center' : undefined,
+      }}
+    >
       {props.list.map((command, index) => (
         <DraggableCommand
           key={command.id}
