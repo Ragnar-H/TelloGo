@@ -11,6 +11,7 @@ import { CommandItem, Commands, CommandDirection } from './DraggableCommands'
 import { primaryDarkColor } from './theme'
 import { Control } from './ControlCommand'
 import { setSpeed, sendCommand } from './DroneService'
+import { WebRTC } from './WebRTC'
 
 async function wait(seconds: number) {
   return new Promise(resolve => {
@@ -253,6 +254,7 @@ export function CommandBoard() {
             </div>
           )}
         </Droppable>
+        <WebRTC />
         <Droppable droppableId="commands" direction="horizontal">
           {(provided: DroppableProvided) => (
             <div
