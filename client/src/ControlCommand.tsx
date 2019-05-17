@@ -2,16 +2,19 @@ import React from 'react'
 import { secondaryTextColor } from './theme'
 
 export type Control = 'land' | 'takeoff'
-
+export type ControlledCommand = {
+  id: string
+  action: Control
+}
 type Props = {
-  control: Control
+  action: Control
 }
 
 export function ControlCommand(props: Props) {
   return (
     <svg viewBox="0 0 32 52" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M16.5 3L16.5 47" stroke={secondaryTextColor} strokeWidth="4" />
-      {props.control === 'land' ? (
+      {props.action === 'land' ? (
         <path d="M30 16L16.5 3L2 16" stroke={secondaryTextColor} strokeWidth="4" />
       ) : (
         <path d="M2 32L16.5 47L30 32" stroke={secondaryTextColor} strokeWidth="4" />

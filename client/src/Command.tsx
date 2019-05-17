@@ -15,7 +15,7 @@ const STEP = 5
 
 export type DirectedCommand = {
   id: string
-  direction: CommandDirection
+  action: CommandDirection
   speed: number
   distance: number
 }
@@ -61,12 +61,12 @@ function getInitialCoordinates(command: DirectedCommand) {
 
 export function Command(props: Props) {
   const coords = getInitialCoordinates({
-    direction: props.direction,
+    action: props.action,
     distance: props.distance,
     speed: props.speed,
     id: props.id,
   })
-  const rotation = getRotation(props.direction)
+  const rotation = getRotation(props.action)
   const { tip, base, head } = coords
   const bodyPath = `M${tip.x} ${tip.y}L${base.x} ${base.y}`
   const arrowPath = `M${head.x1} ${head.y1}L${head.x2} ${head.y2}L${head.x3} ${head.y3}`

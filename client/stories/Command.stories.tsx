@@ -24,7 +24,7 @@ storiesOf('Command', module)
         id="some-command-id"
         onSetDistance={action('onSetDistance')}
         onSetSpeed={action('onSetSpeed')}
-        direction="left"
+        action="left"
         speed={number('Speed', 10, { min: 10, max: 100, range: true, step: 5 })}
         distance={number('Distance', 20, { min: 20, max: 500, range: true, step: 5 })}
       />
@@ -33,10 +33,10 @@ storiesOf('Command', module)
   .add('control commands', () => (
     <div style={{ display: 'flex', flexDirection: 'row' }}>
       <CommandContainer>
-        <ControlCommand control="land" />
+        <ControlCommand action="land" />
       </CommandContainer>
       <CommandContainer>
-        <ControlCommand control="takeoff" />
+        <ControlCommand action="takeoff" />
       </CommandContainer>
     </div>
   ))
@@ -47,7 +47,7 @@ storiesOf('Command', module)
           id="command-id-0"
           onSetDistance={action('onSetDistance')}
           onSetSpeed={action('onSetSpeed')}
-          direction="left"
+          action="left"
           speed={10}
           distance={20}
         />
@@ -57,7 +57,7 @@ storiesOf('Command', module)
           id="command-id-1"
           onSetDistance={action('onSetDistance')}
           onSetSpeed={action('onSetSpeed')}
-          direction="down"
+          action="down"
           speed={70}
           distance={250}
         />
@@ -67,7 +67,7 @@ storiesOf('Command', module)
           id="command-id-2"
           onSetDistance={action('onSetDistance')}
           onSetSpeed={action('onSetSpeed')}
-          direction="right"
+          action="right"
           speed={20}
           distance={20}
         />
@@ -77,7 +77,7 @@ storiesOf('Command', module)
           id="command-id-3"
           onSetDistance={action('onSetDistance')}
           onSetSpeed={action('onSetSpeed')}
-          direction="up"
+          action="up"
           speed={10}
           distance={500}
         />

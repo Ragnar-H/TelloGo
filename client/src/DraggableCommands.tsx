@@ -2,6 +2,7 @@ import React from 'react'
 import { Draggable, DraggableProvided, DraggableStateSnapshot } from 'react-beautiful-dnd'
 import { Command, DirectedCommand } from './Command'
 import { secondaryColor, secondaryLightColor, sizingUnit } from './theme'
+import { ControlledCommand, ControlCommand } from './ControlCommand'
 
 export type CommandDirection = 'up' | 'down' | 'left' | 'right'
 
@@ -16,7 +17,7 @@ const getItemStyle = (draggableStyle: any, isDragging: boolean): {} => ({
   ...draggableStyle,
 })
 
-export type CommandItem = DirectedCommand
+export type CommandItem = DirectedCommand | ControlledCommand
 
 type CommandProps = {
   index: number
@@ -42,14 +43,19 @@ export function DraggableCommand(props: CommandProps) {
               snapshotDraggable.isDragging
             )}
           >
-            <Command
-              id={props.commandItem.id}
-              direction={props.commandItem.direction}
-              speed={props.commandItem.speed}
-              distance={props.commandItem.distance}
-              onSetDistance={props.onSetDistance}
-              onSetSpeed={props.onSetSpeed}
-            />
+            {props.commandItem.action === 'land' ||
+            props.commandItem.action === 'takeoff' ? (
+              <ControlCommand action={props.commandItem.action} />
+            ) : (
+              <Command
+                id={props.commandItem.id}
+                action={props.commandItem.action}
+                speed={(props.commandItem as any).speed}
+                distance={(props.commandItem as any).distance}
+                onSetDistance={props.onSetDistance}
+                onSetSpeed={props.onSetSpeed}
+              />
+            )}
           </div>
           {providedDraggable.placeholder}
         </div>

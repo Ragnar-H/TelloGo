@@ -9,6 +9,8 @@ import {
 } from 'react-beautiful-dnd'
 import { CommandItem, Commands, CommandDirection } from './DraggableCommands'
 import { primaryDarkColor } from './theme'
+import { Control } from './ControlCommand'
+import { DirectedCommand } from './Command'
 
 const reorder = (
   list: CommandItem[],
@@ -47,10 +49,14 @@ function fillMissingCommands(commandList: CommandItem[]): CommandItem[] {
 
   initialCommands.map(command => {
     const commandIsAvailable = commands.find(
-      availableCommand => availableCommand.direction === command.direction
+      availableCommand => availableCommand.action === command.action
     )
     if (!commandIsAvailable) {
-      commands.push(createCommand(command.direction))
+      if (command.action === 'takeoff' || command.action === 'land') {
+        commands.push(createControlledCommand(command.action))
+      } else {
+        commands.push(createDirectedCommand(command.action))
+      }
     }
   })
 
@@ -59,20 +65,29 @@ function fillMissingCommands(commandList: CommandItem[]): CommandItem[] {
 
 let commandIdx = 0
 
-function createCommand(direction: CommandDirection): CommandItem {
+function createDirectedCommand(direction: CommandDirection): CommandItem {
   return {
-    direction,
+    action: direction,
     id: `${commandIdx++}-command`,
     speed: 10,
     distance: 20,
   }
 }
 
+function createControlledCommand(action: Control): CommandItem {
+  return {
+    action,
+    id: `${commandIdx++}-command`,
+  }
+}
+
 const initialCommands: CommandItem[] = [
-  createCommand('up'),
-  createCommand('down'),
-  createCommand('right'),
-  createCommand('left'),
+  createControlledCommand('takeoff'),
+  createControlledCommand('land'),
+  createDirectedCommand('up'),
+  createDirectedCommand('down'),
+  createDirectedCommand('right'),
+  createDirectedCommand('left'),
 ]
 
 export function CommandBoard() {
@@ -83,7 +98,8 @@ export function CommandBoard() {
     const availableClone = availableCommands.slice()
     const availableIdx = availableClone.findIndex(command => command.id === commandId)
     if (availableIdx > 0) {
-      availableCommands[availableIdx].speed = speed
+      ;(availableCommands[availableIdx] as any).speed = speed
+
       setAvailableCommands(availableClone)
     } else {
       const queuedClone = queuedCommands.slice()
@@ -92,7 +108,7 @@ export function CommandBoard() {
       if (queuedIdx < 0) {
         throw new Error(`Cannot find command by id ${commandId}`)
       }
-      queuedClone[queuedIdx].speed = speed
+      ;(queuedClone[queuedIdx] as any).speed = speed
       setQueuedCommands(queuedClone)
     }
   }
@@ -101,7 +117,7 @@ export function CommandBoard() {
     const availableClone = availableCommands.slice()
     const availableIdx = availableClone.findIndex(command => command.id === commandId)
     if (availableIdx > 0) {
-      availableCommands[availableIdx].distance = distance
+      ;(availableCommands[availableIdx] as any).distance = distance
       setAvailableCommands(availableClone)
     } else {
       const queuedClone = queuedCommands.slice()
@@ -110,7 +126,7 @@ export function CommandBoard() {
       if (queuedIdx < 0) {
         throw new Error(`Cannot find command by id ${commandId}`)
       }
-      queuedClone[queuedIdx].distance = distance
+      ;(queuedClone[queuedIdx] as any).distance = distance
       setQueuedCommands(queuedClone)
     }
   }
