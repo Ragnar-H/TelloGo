@@ -5,12 +5,10 @@ import { secondaryColor, secondaryLightColor, sizingUnit } from './theme'
 
 export type CommandDirection = 'up' | 'down' | 'left' | 'right'
 
-const COMMAND_WIDTH = sizingUnit * 16
 const getItemStyle = (draggableStyle: any, isDragging: boolean): {} => ({
   userSelect: 'none',
   padding: 2 * sizingUnit,
   margin: `0 0 ${sizingUnit}px 0`,
-  width: `${COMMAND_WIDTH}px`,
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',

@@ -77,8 +77,6 @@ export function Command(props: Props) {
   return (
     <div style={{ display: 'flex', alignItems: 'center', flexDirection: 'column' }}>
       <svg
-        width="100"
-        height="100"
         viewBox="0 0 48 48"
         fill="none"
         transform={`rotate(${rotation})`}
