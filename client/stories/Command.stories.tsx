@@ -4,6 +4,7 @@ import { storiesOf } from '@storybook/react'
 import { withKnobs, number } from '@storybook/addon-knobs'
 import { action } from '@storybook/addon-actions'
 import { Command } from '../src/Command'
+import { ControlCommand } from '../src/ControlCommand'
 import { center } from '../.storybook/decorators'
 
 type Props = {
@@ -28,6 +29,16 @@ storiesOf('Command', module)
         distance={number('Distance', 20, { min: 20, max: 500, range: true, step: 5 })}
       />
     </CommandContainer>
+  ))
+  .add('control commands', () => (
+    <div style={{ display: 'flex', flexDirection: 'row' }}>
+      <CommandContainer>
+        <ControlCommand control="land" />
+      </CommandContainer>
+      <CommandContainer>
+        <ControlCommand control="takeoff" />
+      </CommandContainer>
+    </div>
   ))
   .add('multiple', () => (
     <div style={{ display: 'flex', flexDirection: 'row' }}>
