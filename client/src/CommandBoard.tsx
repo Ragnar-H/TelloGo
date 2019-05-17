@@ -10,7 +10,6 @@ import {
 import { CommandItem, Commands, CommandDirection } from './DraggableCommands'
 import { primaryDarkColor } from './theme'
 import { Control } from './ControlCommand'
-import { DirectedCommand } from './Command'
 
 const reorder = (
   list: CommandItem[],
@@ -177,7 +176,6 @@ export function CommandBoard() {
       style={{
         minHeight: '100vh',
         height: '100vh',
-        minWidth: '100vw',
         display: 'grid',
         gridTemplateAreas: `'queue video'
                             'queue commands'`,

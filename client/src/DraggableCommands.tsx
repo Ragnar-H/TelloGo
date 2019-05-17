@@ -10,6 +10,7 @@ const getItemStyle = (draggableStyle: any, isDragging: boolean): {} => ({
   userSelect: 'none',
   padding: 2 * sizingUnit,
   margin: `0 0 ${sizingUnit}px 0`,
+  width: `${sizingUnit}rem`,
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
@@ -33,31 +34,28 @@ export function DraggableCommand(props: CommandProps) {
         providedDraggable: DraggableProvided,
         snapshotDraggable: DraggableStateSnapshot
       ) => (
-        <div>
-          <div
-            ref={providedDraggable.innerRef}
-            {...providedDraggable.draggableProps}
-            {...providedDraggable.dragHandleProps}
-            style={getItemStyle(
-              providedDraggable.draggableProps.style,
-              snapshotDraggable.isDragging
-            )}
-          >
-            {props.commandItem.action === 'land' ||
-            props.commandItem.action === 'takeoff' ? (
-              <ControlCommand action={props.commandItem.action} />
-            ) : (
-              <Command
-                id={props.commandItem.id}
-                action={props.commandItem.action}
-                speed={(props.commandItem as any).speed}
-                distance={(props.commandItem as any).distance}
-                onSetDistance={props.onSetDistance}
-                onSetSpeed={props.onSetSpeed}
-              />
-            )}
-          </div>
-          {providedDraggable.placeholder}
+        <div
+          ref={providedDraggable.innerRef}
+          {...providedDraggable.draggableProps}
+          {...providedDraggable.dragHandleProps}
+          style={getItemStyle(
+            providedDraggable.draggableProps.style,
+            snapshotDraggable.isDragging
+          )}
+        >
+          {props.commandItem.action === 'land' ||
+          props.commandItem.action === 'takeoff' ? (
+            <ControlCommand action={props.commandItem.action} />
+          ) : (
+            <Command
+              id={props.commandItem.id}
+              action={props.commandItem.action}
+              speed={(props.commandItem as any).speed}
+              distance={(props.commandItem as any).distance}
+              onSetDistance={props.onSetDistance}
+              onSetSpeed={props.onSetSpeed}
+            />
+          )}
         </div>
       )}
     </Draggable>

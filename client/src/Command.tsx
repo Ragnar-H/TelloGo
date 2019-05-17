@@ -97,6 +97,8 @@ export function Command(props: Props) {
         <label
           htmlFor="distance"
           style={{
+            width: '100%',
+            minWidth: 0,
             display: 'flex',
             justifyContent: 'space-between',
             color: primaryTextColor,
@@ -118,6 +120,7 @@ export function Command(props: Props) {
             }
           }}
           style={{
+            width: '100%',
             minWidth: 0,
             display: 'flex',
             color: primaryTextColor,
@@ -130,6 +133,8 @@ export function Command(props: Props) {
         <label
           htmlFor="speed"
           style={{
+            width: '100%',
+            minWidth: 0,
             display: 'flex',
             justifyContent: 'space-between',
             color: primaryTextColor,
@@ -151,6 +156,7 @@ export function Command(props: Props) {
             }
           }}
           style={{
+            width: '100%',
             minWidth: 0,
             display: 'flex',
             color: primaryTextColor,
