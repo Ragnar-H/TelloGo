@@ -96,7 +96,7 @@ export function CommandBoard() {
   function handleSetSpeed(commandId: string, speed: number) {
     const availableClone = availableCommands.slice()
     const availableIdx = availableClone.findIndex(command => command.id === commandId)
-    if (availableIdx > 0) {
+    if (availableIdx >= 0) {
       ;(availableCommands[availableIdx] as any).speed = speed
 
       setAvailableCommands(availableClone)
@@ -115,7 +115,7 @@ export function CommandBoard() {
   function handleSetDistance(commandId: string, distance: number) {
     const availableClone = availableCommands.slice()
     const availableIdx = availableClone.findIndex(command => command.id === commandId)
-    if (availableIdx > 0) {
+    if (availableIdx >= 0) {
       ;(availableCommands[availableIdx] as any).distance = distance
       setAvailableCommands(availableClone)
     } else {
