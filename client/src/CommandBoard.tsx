@@ -157,7 +157,19 @@ export function CommandBoard() {
   }
 
   return (
-    <div style={{ minHeight: '100vh' }}>
+    <div
+      style={{
+        minHeight: '100vh',
+        height: '100vh',
+        minWidth: '100vw',
+        display: 'grid',
+        gridTemplateAreas: `'queue video'
+                            'queue commands'`,
+        gridTemplateColumns: '1fr 4fr',
+        gridTemplateRows: '2fr 1fr',
+        gridGap: '1rem',
+      }}
+    >
       <DragDropContext onDragEnd={onDragEnd}>
         <Droppable droppableId="queuedCommands">
           {(provided: DroppableProvided) => (
@@ -165,8 +177,9 @@ export function CommandBoard() {
               ref={provided.innerRef}
               {...provided.droppableProps}
               style={{
-                minHeight: '300px',
+                overflowY: 'scroll',
                 backgroundColor: primaryDarkColor,
+                gridArea: 'queue',
               }}
             >
               <div ref={provided.innerRef} {...provided.droppableProps}>
@@ -186,7 +199,7 @@ export function CommandBoard() {
             <div
               ref={provided.innerRef}
               {...provided.droppableProps}
-              style={{ minHeight: '120px' }}
+              style={{ gridArea: 'commands' }}
             >
               <Commands
                 direction="row"
@@ -194,7 +207,6 @@ export function CommandBoard() {
                 onSetDistance={handleSetDistance}
                 onSetSpeed={handleSetSpeed}
               />
-              {provided.placeholder}
             </div>
           )}
         </Droppable>
