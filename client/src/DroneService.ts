@@ -68,7 +68,7 @@ export function getCommandDataChannel() {
 }
 
 // type Command = 'connect' | 'streamon' | 'streamoff' | 'land' | 'takeoff' | 'down'
-function sendCommand(command: string) {
+export function sendCommand(command: string) {
   const dataChannel = getCommandDataChannel()
   dataChannel.send(command)
 }
@@ -95,4 +95,20 @@ export function land() {
 
 export function down(distance: number) {
   sendCommand(`down ${distance}`)
+}
+
+export function up(distance: number) {
+  sendCommand(`up ${distance}`)
+}
+
+export function left(distance: number) {
+  sendCommand(`left ${distance}`)
+}
+
+export function right(distance: number) {
+  sendCommand(`right ${distance}`)
+}
+
+export function setSpeed(speed: number) {
+  sendCommand(`speed ${speed}`)
 }

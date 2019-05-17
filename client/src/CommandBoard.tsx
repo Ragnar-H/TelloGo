@@ -10,6 +10,7 @@ import {
 import { CommandItem, Commands, CommandDirection } from './DraggableCommands'
 import { primaryDarkColor } from './theme'
 import { Control } from './ControlCommand'
+import { setSpeed, sendCommand } from './DroneService'
 
 async function wait(seconds: number) {
   return new Promise(resolve => {
@@ -116,10 +117,13 @@ export function CommandBoard() {
       }
       const currentCommand = commands[0]
       if (currentCommand) {
-        const { speed, distance } = currentCommand as any
+        const { speed, distance, action } = currentCommand as any
         if (speed) {
+          setSpeed(speed)
+          sendCommand(`${action} ${distance}`)
           await wait(distance / speed)
         } else {
+          sendCommand(action)
           await wait(5)
         }
       }
