@@ -126,7 +126,7 @@ export function CommandBoard() {
           await wait(distance / speed)
         } else {
           sendCommand(action)
-          await wait(5)
+          await wait(8)
         }
       }
 
