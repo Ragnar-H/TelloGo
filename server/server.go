@@ -6,7 +6,6 @@ import (
 	"fmt"
 	"math/rand"
 	"net/http"
-	"strings"
 
 	"github.com/pion/webrtc/v2"
 )
@@ -94,25 +93,7 @@ func droneWebRTC(offer webrtc.SessionDescription, videoSrc string, tello Tello) 
 		// Register text message handling
 		d.OnMessage(func(msg webrtc.DataChannelMessage) {
 			fmt.Printf("Message from DataChannel '%s': '%s'\n", d.Label(), string(msg.Data))
-			if string(msg.Data) == "connect" {
-				fmt.Println("Attempting to connect to drone")
-				tello.connect()
-			}
-			if string(msg.Data) == "streamon" {
-				tello.streamOn()
-			}
-			if string(msg.Data) == "streamoff" {
-				tello.streamOff()
-			}
-			if string(msg.Data) == "land" {
-				tello.land()
-			}
-			if string(msg.Data) == "takeoff" {
-				tello.takeOff()
-			}
-			if strings.Contains(string(msg.Data), "down") {
-				tello.down(string(msg.Data))
-			}
+			tello.sendCommand(string(msg.Data))
 		})
 	})
 

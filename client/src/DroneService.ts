@@ -74,7 +74,7 @@ export function sendCommand(command: string) {
 }
 
 export function connectToDrone() {
-  sendCommand('connect')
+  sendCommand('command')
 }
 
 export function streamOn() {
