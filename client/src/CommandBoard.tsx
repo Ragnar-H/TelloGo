@@ -121,6 +121,7 @@ export function CommandBoard() {
         const { speed, distance, action } = currentCommand as any
         if (speed) {
           setSpeed(speed)
+          await wait(2)
           sendCommand(`${action} ${distance}`)
           await wait(distance / speed)
         } else {
