@@ -1,13 +1,10 @@
 import React from 'react'
 import './App.css'
-import { WebRTC } from './WebRTC'
+
+import { CommandBoard } from './CommandBoard'
 
 const App: React.FC = () => {
-  return (
-    <div className="App" style={{ backgroundColor: '#ff33ff' }}>
-      <WebRTC />
-    </div>
-  )
+  return <CommandBoard />
 }
 
 export default App

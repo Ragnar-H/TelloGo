@@ -19,7 +19,11 @@ export function WebRTC() {
   const video = useRef<HTMLVideoElement>(null)
   return (
     <div>
-      <video ref={video} autoPlay style={{ width: '300px', height: '200px' }} />
+      <video
+        ref={video}
+        autoPlay
+        style={{ height: '400px', width: '600px', backgroundColor: 'hotpink' }}
+      />
       <button
         onClick={() => {
           if (video.current === null) {
@@ -30,6 +34,7 @@ export function WebRTC() {
       >
         Connect
       </button>
+      <button onClick={connectToDrone}>Connect to drone</button>
       <button onClick={streamOn}>Start stream</button>
       <button onClick={streamOff}>Stop stream</button>
     </div>

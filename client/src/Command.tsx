@@ -75,7 +75,15 @@ export function Command(props: Props) {
     arrowPath,
   })
   return (
-    <div style={{ display: 'flex', alignItems: 'center', flexDirection: 'column' }}>
+    <div
+      style={{
+        display: 'flex',
+        alignItems: 'center',
+        flexDirection: 'column',
+        height: '100%',
+        width: '100%',
+      }}
+    >
       <svg
         viewBox="0 0 48 48"
         fill="none"
