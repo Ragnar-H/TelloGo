@@ -12,7 +12,7 @@ type Props = {
 
 export function ControlCommand(props: Props) {
   return (
-    <div>
+    <div style={{ height: '100%', width: '100%' }}>
       <svg viewBox="0 0 32 52" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M16.5 3L16.5 47" stroke={secondaryTextColor} strokeWidth="4" />
         {props.action === 'land' ? (
