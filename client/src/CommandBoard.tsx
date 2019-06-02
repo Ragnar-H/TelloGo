@@ -218,14 +218,12 @@ export function CommandBoard() {
   return (
     <div
       style={{
-        minHeight: '100vh',
         height: '100vh',
         display: 'grid',
         gridTemplateAreas: `'queue video'
                             'queue commands'`,
         gridTemplateColumns: '1fr 4fr',
-        gridTemplateRows: '2fr 1fr',
-        gridGap: '1rem',
+        gridTemplateRows: 'minmax(0, 2fr) minmax(0, 1fr)',
       }}
     >
       <DragDropContext onDragEnd={onDragEnd}>
