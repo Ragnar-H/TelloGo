@@ -1,12 +1,7 @@
 import React from 'react'
 import { CommandDirection } from 'DraggableCommands'
 import { useSpring, animated } from 'react-spring'
-import {
-  primaryTextColor,
-  secondaryTextColor,
-  secondaryDarkColor,
-  sizingUnit,
-} from './theme'
+import { secondaryTextColor, secondaryDarkColor, sizingUnit } from './theme'
 export const MAX_SPEED = 100
 export const MIN_SPEED = 10
 export const MAX_DISTANCE = 500
@@ -109,7 +104,7 @@ export function Command(props: Props) {
             minWidth: 0,
             display: 'flex',
             justifyContent: 'space-between',
-            color: primaryTextColor,
+            color: secondaryTextColor,
           }}
         >
           Distance
@@ -131,7 +126,7 @@ export function Command(props: Props) {
             width: '100%',
             minWidth: 0,
             display: 'flex',
-            color: primaryTextColor,
+            color: secondaryTextColor,
             backgroundColor: secondaryDarkColor,
             border: 0,
             borderRadius: `${sizingUnit}px`,
@@ -145,7 +140,7 @@ export function Command(props: Props) {
             minWidth: 0,
             display: 'flex',
             justifyContent: 'space-between',
-            color: primaryTextColor,
+            color: secondaryTextColor,
           }}
         >
           Speed
@@ -167,7 +162,7 @@ export function Command(props: Props) {
             width: '100%',
             minWidth: 0,
             display: 'flex',
-            color: primaryTextColor,
+            color: secondaryTextColor,
             backgroundColor: secondaryDarkColor,
             border: 0,
             borderRadius: `${sizingUnit}px`,

@@ -14,7 +14,7 @@ const getItemStyle = (draggableStyle: any, isDragging: boolean): {} => ({
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
-  background: isDragging ? secondaryColor : secondaryLightColor,
+  background: isDragging ? secondaryLightColor : secondaryColor,
   ...draggableStyle,
 })
 

@@ -8,7 +8,7 @@ import {
   DraggableLocation,
 } from 'react-beautiful-dnd'
 import { CommandItem, Commands, CommandDirection } from './DraggableCommands'
-import { primaryDarkColor } from './theme'
+import { primaryDarkColor, sizingUnit } from './theme'
 import { Control } from './ControlCommand'
 import { setSpeed, sendCommand } from './DroneService'
 import { WebRTC } from './WebRTC'
@@ -236,7 +236,6 @@ export function CommandBoard() {
               {...provided.droppableProps}
               style={{
                 overflowY: 'scroll',
-                backgroundColor: primaryDarkColor,
                 gridArea: 'queue',
               }}
             >

@@ -19,11 +19,7 @@ export function WebRTC() {
   const video = useRef<HTMLVideoElement>(null)
   return (
     <div>
-      <video
-        ref={video}
-        autoPlay
-        style={{ height: '400px', width: '600px', backgroundColor: 'hotpink' }}
-      />
+      <video ref={video} autoPlay style={{ height: '100%', width: '100%' }} />
       <button
         onClick={() => {
           if (video.current === null) {
