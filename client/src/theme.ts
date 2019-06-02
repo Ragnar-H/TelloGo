@@ -1,10 +1,10 @@
-export const primaryColor = '#ff4081'
-export const primaryLightColor = '#ff79b0'
-export const primaryDarkColor = '#c60055'
-export const secondaryColor = '#673ab7'
-export const secondaryLightColor = '#9a67ea'
-export const secondaryDarkColor = '#320b86'
-export const primaryTextColor = '#ffe082'
-export const secondaryTextColor = '#ffb300'
+export const primaryColor = '#ffa500'
+export const primaryLightColor = '#ffd64a'
+export const primaryDarkColor = '#c67600'
+export const secondaryColor = '#424242'
+export const secondaryLightColor = '#6d6d6d'
+export const secondaryDarkColor = '#1b1b1b'
+export const primaryTextColor = '#424242'
+export const secondaryTextColor = '#ffffff'
 
 export const sizingUnit = 8
