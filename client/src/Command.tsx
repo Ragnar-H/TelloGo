@@ -96,7 +96,9 @@ export function Command(props: Props) {
           strokeWidth="4"
         />
       </svg>
-      <div style={{ display: 'flex', flexDirection: 'column' }}>
+      <div
+        style={{ display: 'flex', flexDirection: 'column', padding: `${sizingUnit}px` }}
+      >
         <label
           htmlFor="distance"
           style={{
@@ -130,7 +132,7 @@ export function Command(props: Props) {
             backgroundColor: secondaryDarkColor,
             border: 0,
             borderRadius: `${sizingUnit}px`,
-            padding: `${sizingUnit}px`,
+            padding: `${sizingUnit / 2}px`,
           }}
         />
         <label
@@ -166,7 +168,7 @@ export function Command(props: Props) {
             backgroundColor: secondaryDarkColor,
             border: 0,
             borderRadius: `${sizingUnit}px`,
-            padding: `${sizingUnit}px`,
+            padding: `${sizingUnit / 2}px`,
           }}
         />
       </div>
