@@ -12,7 +12,18 @@ type Props = {
 }
 
 function CommandContainer(props: Props) {
-  return <div style={{ height: '20rem', width: '10rem' }}>{props.children}</div>
+  return (
+    <div
+      style={{
+        height: '20rem',
+        width: '10rem',
+        backgroundColor: '#ffa500',
+        padding: '1rem',
+      }}
+    >
+      {props.children}
+    </div>
+  )
 }
 
 storiesOf('Command', module)
