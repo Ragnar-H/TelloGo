@@ -260,7 +260,7 @@ export function CommandBoard() {
             <div
               ref={provided.innerRef}
               {...provided.droppableProps}
-              style={{ gridArea: 'commands' }}
+              style={{ gridArea: 'commands', overflowX: 'auto' }}
             >
               <Commands
                 direction="row"
