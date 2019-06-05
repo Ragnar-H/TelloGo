@@ -42,7 +42,7 @@ function getInitialCoordinates(command: DirectedCommand) {
   const minBaseLength = 24
   const speed = (command.speed / MAX_SPEED) * 8 + minArrowLength
   const distance = (command.distance / MAX_DISTANCE) * 16 + minBaseLength
-  const tip = { x: 4, y: 24 }
+  const tip = { x: 24 - distance / 2, y: 24 }
   const base = { x: tip.x + distance, y: 24 }
   const head = {
     x1: tip.x + speed,
