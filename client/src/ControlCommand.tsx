@@ -1,5 +1,6 @@
 import React from 'react'
-import { secondaryTextColor } from './theme'
+import { secondaryTextColor, secondaryDarkColor } from './theme'
+import { useSpring, animated } from 'react-spring'
 
 export type Control = 'land' | 'takeoff'
 export type ControlledCommand = {
@@ -8,9 +9,11 @@ export type ControlledCommand = {
 }
 type Props = {
   action: Control
+  timeLeft: number
 }
 
 export function ControlCommand(props: Props) {
+  const durationLeft = useSpring({ height: 52 * props.timeLeft })
   return (
     <div style={{ height: '100%', width: '100%' }}>
       <svg
@@ -20,6 +23,11 @@ export function ControlCommand(props: Props) {
         height="100%"
         width="100%"
       >
+        <animated.rect
+          width="32"
+          height={durationLeft.height}
+          fill={secondaryDarkColor}
+        />
         <path d="M16.5 3L16.5 47" stroke={secondaryTextColor} strokeWidth="4" />
         {props.action === 'takeoff' ? (
           <path d="M30 16L16.5 3L2 16" stroke={secondaryTextColor} strokeWidth="4" />

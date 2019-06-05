@@ -26,6 +26,7 @@ type CommandProps = {
   commandItem: CommandItem
   onSetSpeed: (speed: number) => void
   onSetDistance: (distance: number) => void
+  timeLeft: number
 }
 
 export function DraggableCommand(props: CommandProps) {
@@ -46,9 +47,10 @@ export function DraggableCommand(props: CommandProps) {
         >
           {props.commandItem.action === 'land' ||
           props.commandItem.action === 'takeoff' ? (
-            <ControlCommand action={props.commandItem.action} />
+            <ControlCommand timeLeft={props.timeLeft} action={props.commandItem.action} />
           ) : (
             <Command
+              timeLeft={props.timeLeft}
               id={props.commandItem.id}
               action={props.commandItem.action}
               speed={(props.commandItem as any).speed}
@@ -68,6 +70,7 @@ type CommandsProps = {
   direction: 'row' | 'column'
   onSetSpeed: (commandId: string, speed: number) => void
   onSetDistance: (commandId: string, distance: number) => void
+  firstItemTimeLeft: number
 }
 
 export function Commands(props: CommandsProps) {
@@ -86,6 +89,7 @@ export function Commands(props: CommandsProps) {
           key={command.id}
           commandItem={command}
           index={index}
+          timeLeft={index === 0 ? props.firstItemTimeLeft : 1}
           onSetDistance={distance => {
             props.onSetDistance(command.id, distance)
           }}

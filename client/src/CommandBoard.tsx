@@ -102,6 +102,7 @@ const initialCommands: CommandItem[] = [
 export function CommandBoard() {
   const [queuedCommands, setQueuedCommands] = useState<CommandItem[]>([])
   const [availableCommands, setAvailableCommands] = useState(initialCommands)
+  const [firstItemTimeLeft, setFirstItemTimeLeft] = useState(1)
 
   const [isPlaying, setIsPlaying] = useState(false)
 
@@ -121,14 +122,27 @@ export function CommandBoard() {
       const currentCommand = commands[0]
       if (currentCommand) {
         const { speed, distance, action } = currentCommand as any
+        setFirstItemTimeLeft(1)
         if (speed) {
           setSpeed(speed)
           await wait(2)
           sendCommand(`${action} ${distance}`)
-          await wait(distance / speed)
+          const totalDuration = distance / speed
+          let secondsSpent = 0
+          while (secondsSpent <= totalDuration) {
+            setFirstItemTimeLeft(1 - secondsSpent / totalDuration)
+            secondsSpent++
+            await wait(1)
+          }
         } else {
           sendCommand(action)
-          await wait(8)
+          const totalDuration = 8
+          let secondsSpent = 0
+          while (secondsSpent <= totalDuration) {
+            setFirstItemTimeLeft(1 - secondsSpent / totalDuration)
+            secondsSpent++
+            await wait(1)
+          }
         }
       }
 
@@ -244,6 +258,7 @@ export function CommandBoard() {
               </button>
               <div ref={provided.innerRef} {...provided.droppableProps}>
                 <Commands
+                  firstItemTimeLeft={firstItemTimeLeft}
                   direction="column"
                   list={queuedCommands}
                   onSetDistance={handleSetDistance}
@@ -263,6 +278,7 @@ export function CommandBoard() {
               style={{ gridArea: 'commands', overflowX: 'auto' }}
             >
               <Commands
+                firstItemTimeLeft={1}
                 direction="row"
                 list={availableCommands}
                 onSetDistance={handleSetDistance}

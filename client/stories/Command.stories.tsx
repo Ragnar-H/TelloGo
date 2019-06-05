@@ -32,6 +32,7 @@ storiesOf('Command', module)
   .add('default', () => (
     <CommandContainer>
       <Command
+        timeLeft={0.5}
         id="some-command-id"
         onSetDistance={action('onSetDistance')}
         onSetSpeed={action('onSetSpeed')}
@@ -44,10 +45,10 @@ storiesOf('Command', module)
   .add('control commands', () => (
     <div style={{ display: 'flex', flexDirection: 'row' }}>
       <CommandContainer>
-        <ControlCommand action="land" />
+        <ControlCommand action="land" timeLeft={0.3} />
       </CommandContainer>
       <CommandContainer>
-        <ControlCommand action="takeoff" />
+        <ControlCommand action="takeoff" timeLeft={0.7} />
       </CommandContainer>
     </div>
   ))
@@ -55,6 +56,7 @@ storiesOf('Command', module)
     <div style={{ display: 'flex', flexDirection: 'row' }}>
       <CommandContainer>
         <Command
+          timeLeft={0.5}
           id="command-id-0"
           onSetDistance={action('onSetDistance')}
           onSetSpeed={action('onSetSpeed')}
@@ -65,6 +67,7 @@ storiesOf('Command', module)
       </CommandContainer>
       <CommandContainer>
         <Command
+          timeLeft={0.5}
           id="command-id-1"
           onSetDistance={action('onSetDistance')}
           onSetSpeed={action('onSetSpeed')}
@@ -75,6 +78,7 @@ storiesOf('Command', module)
       </CommandContainer>
       <CommandContainer>
         <Command
+          timeLeft={0.5}
           id="command-id-2"
           onSetDistance={action('onSetDistance')}
           onSetSpeed={action('onSetSpeed')}
@@ -85,6 +89,7 @@ storiesOf('Command', module)
       </CommandContainer>
       <CommandContainer>
         <Command
+          timeLeft={0.5}
           id="command-id-3"
           onSetDistance={action('onSetDistance')}
           onSetSpeed={action('onSetSpeed')}
@@ -95,6 +100,7 @@ storiesOf('Command', module)
       </CommandContainer>
       <CommandContainer>
         <Command
+          timeLeft={0.5}
           id="command-id-4"
           onSetDistance={action('onSetDistance')}
           onSetSpeed={action('onSetSpeed')}
@@ -105,6 +111,7 @@ storiesOf('Command', module)
       </CommandContainer>
       <CommandContainer>
         <Command
+          timeLeft={0.5}
           id="command-id-5"
           onSetDistance={action('onSetDistance')}
           onSetSpeed={action('onSetSpeed')}
