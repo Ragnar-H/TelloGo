@@ -4,7 +4,7 @@ import { Command, DirectedCommand } from './Command'
 import { secondaryColor, secondaryLightColor, sizingUnit } from './theme'
 import { ControlledCommand, ControlCommand } from './ControlCommand'
 
-export type CommandDirection = 'up' | 'down' | 'left' | 'right'
+export type CommandDirection = 'up' | 'down' | 'left' | 'right' | 'forward' | 'back'
 
 const getItemStyle = (draggableStyle: any, isDragging: boolean): {} => ({
   userSelect: 'none',

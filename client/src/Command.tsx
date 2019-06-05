@@ -26,8 +26,10 @@ function getRotation(direction: CommandDirection) {
       return 0
     case 'right':
       return 180
+    case 'forward':
     case 'up':
       return 90
+    case 'back':
     case 'down':
       return -90
     default:

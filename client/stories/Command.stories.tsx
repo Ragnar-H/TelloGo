@@ -93,5 +93,25 @@ storiesOf('Command', module)
           distance={500}
         />
       </CommandContainer>
+      <CommandContainer>
+        <Command
+          id="command-id-4"
+          onSetDistance={action('onSetDistance')}
+          onSetSpeed={action('onSetSpeed')}
+          action="forward"
+          speed={70}
+          distance={250}
+        />
+      </CommandContainer>
+      <CommandContainer>
+        <Command
+          id="command-id-5"
+          onSetDistance={action('onSetDistance')}
+          onSetSpeed={action('onSetSpeed')}
+          action="back"
+          speed={100}
+          distance={500}
+        />
+      </CommandContainer>
     </div>
   ))

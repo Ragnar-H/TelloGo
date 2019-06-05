@@ -95,6 +95,8 @@ const initialCommands: CommandItem[] = [
   createDirectedCommand('down'),
   createDirectedCommand('right'),
   createDirectedCommand('left'),
+  createDirectedCommand('forward'),
+  createDirectedCommand('back'),
 ]
 
 export function CommandBoard() {
