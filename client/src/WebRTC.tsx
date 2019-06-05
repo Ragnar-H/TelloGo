@@ -18,21 +18,23 @@ async function startWebRTC(video: HTMLVideoElement) {
 export function WebRTC() {
   const video = useRef<HTMLVideoElement>(null)
   return (
-    <div>
+    <div style={{ position: 'relative' }}>
       <video ref={video} autoPlay style={{ height: '100%', width: '100%' }} />
-      <button
-        onClick={() => {
-          if (video.current === null) {
-            throw new Error('Video element is not ready')
-          }
-          startWebRTC(video.current)
-        }}
-      >
-        Connect
-      </button>
-      <button onClick={connectToDrone}>Connect to drone</button>
-      <button onClick={streamOn}>Start stream</button>
-      <button onClick={streamOff}>Stop stream</button>
+      <div style={{ position: 'absolute', bottom: 0 }}>
+        <button
+          onClick={() => {
+            if (video.current === null) {
+              throw new Error('Video element is not ready')
+            }
+            startWebRTC(video.current)
+          }}
+        >
+          Connect
+        </button>
+        <button onClick={connectToDrone}>Connect to drone</button>
+        <button onClick={streamOn}>Start stream</button>
+        <button onClick={streamOff}>Stop stream</button>
+      </div>
     </div>
   )
 }
