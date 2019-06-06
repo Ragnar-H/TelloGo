@@ -9,6 +9,7 @@ import {
 } from 'react-beautiful-dnd'
 import { CommandItem, Commands, CommandDirection } from './DraggableCommands'
 import { primaryDarkColor, sizingUnit } from './theme'
+import { PlayStopIcon } from './PlayStopIcon'
 import { Control } from './ControlCommand'
 import { setSpeed, sendCommand } from './DroneService'
 import { WebRTC } from './WebRTC'
@@ -251,11 +252,23 @@ export function CommandBoard() {
               style={{
                 overflowY: 'scroll',
                 gridArea: 'queue',
+                position: 'relative',
               }}
             >
-              <button onClick={() => setIsPlaying(prevIsPlaying => !prevIsPlaying)}>
-                {isPlaying ? 'Stop' : 'Play'}
-              </button>
+              <div
+                style={{
+                  height: '4rem',
+                  width: '100%',
+                  display: 'flex',
+                  justifyContent: 'center',
+                  margin: `${sizingUnit}px 0`,
+                }}
+              >
+                <PlayStopIcon
+                  onClick={() => setIsPlaying(prevIsPlaying => !prevIsPlaying)}
+                  isPlaying={isPlaying}
+                />
+              </div>
               <div ref={provided.innerRef} {...provided.droppableProps}>
                 <Commands
                   firstItemTimeLeft={firstItemTimeLeft}
