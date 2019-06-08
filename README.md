@@ -12,6 +12,9 @@ Playing around with the [Tello SDK](https://terra-1-g.djicdn.com/2d4dce68897a46b
 
 ## Development
 
+You need to install GStreamer locally unfortunately.
+Follow [these steps](https://gstreamer.freedesktop.org/documentation/installing/index.html?gi-language=c)
+
 ### Make
 
 ```
