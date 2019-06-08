@@ -27,6 +27,7 @@ export function ControlCommand(props: Props) {
           width="32"
           height={durationLeft.height}
           fill={secondaryDarkColor}
+          rx="15"
         />
         <path d="M16.5 3L16.5 47" stroke={secondaryTextColor} strokeWidth="4" />
         {props.action === 'takeoff' ? (

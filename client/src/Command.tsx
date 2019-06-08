@@ -88,6 +88,7 @@ export function Command(props: Props) {
           width="48"
           height={durationLeft.height}
           fill={secondaryDarkColor}
+          rx="15"
         />
         <g transform={`rotate(${rotation}, 24, 24)`} x={0}>
           {(props.action === 'up' || props.action === 'down') && (

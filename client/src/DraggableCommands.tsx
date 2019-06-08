@@ -9,12 +9,13 @@ export type CommandDirection = 'up' | 'down' | 'left' | 'right' | 'forward' | 'b
 const getItemStyle = (draggableStyle: any, isDragging: boolean): {} => ({
   userSelect: 'none',
   padding: 2 * sizingUnit,
-  margin: `0 0 ${sizingUnit}px 0`,
+  margin: `0 ${sizingUnit}px ${sizingUnit}px 0`,
   minWidth: `${sizingUnit}rem`,
   width: `${sizingUnit}rem`,
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
+  borderRadius: '15px',
   background: isDragging ? secondaryLightColor : secondaryColor,
   ...draggableStyle,
 })

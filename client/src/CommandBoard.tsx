@@ -8,7 +8,7 @@ import {
   DraggableLocation,
 } from 'react-beautiful-dnd'
 import { CommandItem, Commands, CommandDirection } from './DraggableCommands'
-import { primaryDarkColor, sizingUnit } from './theme'
+import { sizingUnit } from './theme'
 import { PlayStopIcon } from './PlayStopIcon'
 import { Control } from './ControlCommand'
 import { setSpeed, sendCommand } from './DroneService'
