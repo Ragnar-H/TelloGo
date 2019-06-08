@@ -4,15 +4,17 @@ import {
   negotiateConnection,
   connectToDrone,
   setStreamCallback,
+  streamOn,
 } from './DroneService'
 import { ServerConnectIcon } from './ServerConnectIcon'
-import { primaryDarkColor, primaryLightColor, primaryColor } from './theme'
+import { primaryDarkColor, primaryColor } from './theme'
 
 async function startWebRTC(video: HTMLVideoElement) {
   setPeerConnection()
   setStreamCallback(video)
   await negotiateConnection()
   connectToDrone()
+  streamOn()
 }
 
 export function WebRTC() {
