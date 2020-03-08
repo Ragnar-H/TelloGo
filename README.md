@@ -6,9 +6,9 @@ Playing around with the [Tello SDK](https://terra-1-g.djicdn.com/2d4dce68897a46b
 ![](./demo.gif)
 
 ## Built with
-[Pion](https://github.com/pion/) to handle all things WebRTC
-[GStreamer](https://gstreamer.freedesktop.org/) for parsing video stream
-[React](https://reactjs.org/) for UI
+* [Pion](https://github.com/pion/) to handle all things WebRTC
+* [GStreamer](https://gstreamer.freedesktop.org/) for parsing video stream
+* [React](https://reactjs.org/) for UI
 
 ## Development
 
