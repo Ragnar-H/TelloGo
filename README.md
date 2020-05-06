@@ -10,6 +10,10 @@ Playing around with the [Tello SDK](https://terra-1-g.djicdn.com/2d4dce68897a46b
 * [GStreamer](https://gstreamer.freedesktop.org/) for parsing video stream
 * [React](https://reactjs.org/) for UI
 
+## Related work
+
+* [Tello-WebRTC-FPV](https://github.com/oliverpool/tello-webrtc-fpv)
+
 ## Development
 
 You need to install GStreamer locally unfortunately.
@@ -43,3 +47,4 @@ gst-launch-1.0 -v udpsrc port=11111 caps="video/x-h264, stream-format=(string)by
     ! videoconvert \
     ! autovideosink sync=false
 ```
+
